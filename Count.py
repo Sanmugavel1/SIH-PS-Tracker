@@ -35,11 +35,8 @@ else:
 # Compare and notify
 if count > last_count:
     message = f"New submission detected! Total count: {count}"
-else:
-    message = "No changes in submission count."
-
-# Send Telegram message
-requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={CHAT_ID}&text={message}")
+    requests.get(f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={CHAT_ID}&text={message}")
+    
 # Save current count
 with open(COUNT_FILE, "w") as f:
     f.write(str(count))
