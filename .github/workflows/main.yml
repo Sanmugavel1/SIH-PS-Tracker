@@ -18,4 +18,4 @@ jobs:
       - name: Install dependencies
         run: pip install requests beautifulsoup4
       - name: Run script
-        run: python check_count.py
+        run: python Count.py
