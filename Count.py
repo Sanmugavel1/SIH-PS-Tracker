@@ -20,8 +20,16 @@ response = requests.get(PS_URL)
 soup = BeautifulSoup(response.text, 'html.parser')
 
 # ====== CHANGE THIS SELECTOR ======
-# Inspect the SIH page to find the element showing the submission count
-count = int(soup.find('span', {'id':'submission-count'}).text)
+# Find the first <td> that looks like "34/300"
+element = soup.find('td', string=lambda text: text and "/" in text)
+
+if element:
+    current, total = element.get_text(strip=True).split("/")
+    count = int(current)   # this will be 34
+else:
+    count = 0
+
+
 # ==================================
 
 # Compare and notify
