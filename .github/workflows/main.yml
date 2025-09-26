@@ -1,21 +1,24 @@
-name: Check SIH Submission Count
+name: SIH PS Tracker
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # runs every 5 minutes
-  workflow_dispatch:       # allows manual run
+    - cron: "*/10 * * * *"   # ⏰ Runs every 10 minutes
+  workflow_dispatch:         # Allows manual run from GitHub
 
 jobs:
-  check-count:
+  run-script:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: "3.x"
+
       - name: Install dependencies
         run: pip install requests beautifulsoup4
-      - name: Run script
+
+      - name: Run tracker
         run: python Count.py
